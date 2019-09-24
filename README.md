@@ -1,6 +1,8 @@
 # PHPStudy-Backdoor 后门漏洞复现
 phpstudy dll backdoor for v2016 and v2018
 
+![](./PHP-5.2.17-nginx.jpg)
+
 ## 0x01 scan search for backdoor dll
 
 ```
