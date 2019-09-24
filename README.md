@@ -29,7 +29,10 @@ D:\Pentester\phpStudy>md5sum  .\php\php-5.4.45\ext\php_xmlrpc.dll
 
 ## 0x02 exp
 
-`Ps： 脚本编写思路，先检测目标网站php版本，再执行命令，以及输出目标网站的server信息`
+```Ps： 脚本编写思路:
+1.先检测目标网站php版本，再执行命令，以及输出目标网站的server信息
+2. 生成固定字符串md5,验证是否成功执行
+```
 
 ![](./PHP-5.2.17.jpg)
 
